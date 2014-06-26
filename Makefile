@@ -13,4 +13,4 @@ run2:
 	erl -pa ebin -pa deps/*/ebin -config simple_bridge.config -eval "simple_bridge:start(inets, demo2)"
 
 run3:
-	erl -pa ebin -pa deps/*/ebin -config simple_bridge.config -eval "simple_bridge:start(inets, demo3)"
+	erl -pa ebin -pa deps/*/ebin -config simple_bridge.config -eval "simple_bridge:start(inets, demo3)" -eval "chat:start()"
