@@ -1,4 +1,4 @@
--module(sbdemo_handler).
+-module(demo).
 -behaviour(simple_bridge_handler).
 -export([run/1]).
 
