@@ -4,5 +4,5 @@
 -export([run/1]).
 
 run(Bridge) ->
-	Bridge2 = sbw:set_response_data("Hello World", Bridge),
-	sbw:build_response(Bridge2).
+    Bridge2 = sbw:set_response_data("Hello World", Bridge),
+    sbw:build_response(Bridge2).
