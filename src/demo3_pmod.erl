@@ -1,4 +1,4 @@
--module(demo3).
+-module(demo3_pmod).
 -behaviour(simple_bridge_handler).
 -export([
 	run/1,
@@ -9,14 +9,14 @@
 ]).
 
 run(Bridge) ->
-	case sbw:path(Bridge) of
+	case Bridge:path() of
 		"/" -> index(Bridge);
 		"/chat" -> chat(Bridge);
 		_ -> four_oh_four(Bridge)
 	end.
 
 ws_init(Bridge) ->
-	Name = sbw:query_param(name, Bridge),
+	Name = Bridge:query_param(name),
 	chat:connect(Name).
 
 ws_message({text, Msg}, _Bridge) ->
@@ -37,19 +37,19 @@ index(Bridge) ->
 				Name: <input type=text name=name>
 				<input type=submit text='Go!'>
 			</form>",
-	Bridge2 = sbw:set_response_data(Body, Bridge),
+	Bridge2 = Bridge:set_response_data(Body),
 	Bridge2:build_response().
 
 chat(Bridge) ->
-	YourName = sbw:post_param(name, Bridge),
+	YourName = Bridge:post_param(name),
 	Body = chat_body(YourName),
-	Bridge2 = sbw:set_response_data(Body, Bridge),
-	sbw:build_response(Bridge2).
+	Bridge2 = Bridge:set_response_data(Body),
+	Bridge2:build_response().
 
 four_oh_four(Bridge) ->
-	Bridge2 = sbw:set_status_code(404, Bridge),
-	Bridge3 = sbw:set_response_data("Not found", Bridge2),
-	sbw:build_response(Bridge3).
+	Bridge2 = Bridge:set_status_code(404),
+	Bridge3 = Bridge2:set_response_data("Not found"),
+	Bridge3:build_response().
 
 chat_body(YourName) ->
 	["<script src='/js/jquery.js'></script>
@@ -58,4 +58,4 @@ chat_body(YourName) ->
 	<div id=chat></div>
 	Send: <input type=text id=msg>
 	<input type=button value=Send onclick=\"send_msg($('#msg').val())\">
-	<script>init(\"",YourName,"\")</script>"].
+	<script>init(\"", YourName, "\")</script>"].
