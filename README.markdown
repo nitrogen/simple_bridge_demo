@@ -4,7 +4,7 @@ Contained here is a very simple collection of
 [SimpleBridge](https://github.com/nitrogen/simple_bridge) sample modules
 demonstrating basic usage of SimpleBridge 2.0.
 
-Each demo consists of 3 variations: a standard version and a parameterized
+Each demo consists of two variations: a standard version and a parameterized
 module version (files ending with `_pmod`)
 
 ## demo.erl (and demo_pmod.erl)
