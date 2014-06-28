@@ -1,3 +1,4 @@
+% vim: ts=4 sw=4 et
 -module(demo3).
 -behaviour(simple_bridge_handler).
 -export([
