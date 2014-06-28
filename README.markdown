@@ -30,8 +30,8 @@ To change a backend server, you're going to need to do two things:
 
 1. Modify the `Makefile` to make sure the program is launching with the
    appropriate server (inets, cowboy, mochiweb, yaws, webmachine).
-2. Modify `rebar.config` to add the appropriate dependencies. You can view
-   which servers have which dependencies at `deps/simple_bridge/rebar_deps`
+2. Modify `rebar.config` to add the appropriate dependencies.  The current
+   rebar.config has options commented out for each server.
 
 ## Running each demo
 
