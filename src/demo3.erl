@@ -38,7 +38,7 @@ index(Bridge) ->
 				<input type=submit text='Go!'>
 			</form>",
 	Bridge2 = sbw:set_response_data(Body, Bridge),
-	Bridge2:build_response().
+	sbw:build_response(Bridge2).
 
 chat(Bridge) ->
 	YourName = sbw:post_param(name, Bridge),

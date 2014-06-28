@@ -3,7 +3,7 @@
 -export([run/1]).
 
 run(Bridge) ->
-	case Bridge:path() of
+	case sbw:path(Bridge) of
 		"/" -> index(Bridge);
 		"/show" -> show(Bridge);
 		_ -> four_oh_four(Bridge)
@@ -15,16 +15,16 @@ index(Bridge) ->
 				Name: <input type=text name=name>
 				<input type=submit text='Go!'>
 			</form>",
-	Bridge2 = Bridge:set_response_data(Body),
-	Bridge2:build_response().
+	Bridge2 = sbw:set_response_data(Body, Bridge),
+	sbw:build_response(Bridge2).
 
 show(Bridge) ->
-	YourName = Bridge:post_param(name),
+	YourName = sbw:post_param(name, Bridge),
 	Body = ["<h2>Welcome, ", YourName, "</h2>"],
-	Bridge2 = Bridge:set_response_data(Body),
-	Bridge2:build_response().
+	Bridge2 = sbw:set_response_data(Body, Bridge),
+	sbw:build_response(Bridge2).
 
 four_oh_four(Bridge) ->
-	Bridge2 = Bridge:set_status_code(404),
-	Bridge3 = Bridge2:set_response_data("Not found"),
-	Bridge3:build_response().
+	Bridge2 = sbw:set_status_code(404, Bridge),
+	Bridge3 = sbw:set_response_data("Not found", Bridge2),
+	sbw:build_response(Bridge3).
