@@ -4,9 +4,9 @@
 -export([
     run/1,
     ws_init/1,
-    ws_message/2,
-    ws_info/2,
-    ws_terminate/2
+    ws_message/3,
+    ws_info/3,
+    ws_terminate/3
 ]).
 
 run(Bridge) ->
@@ -20,14 +20,14 @@ ws_init(Bridge) ->
     Name = Bridge:query_param(name),
     chat:connect(Name).
 
-ws_message({text, Msg}, _Bridge) ->
+ws_message({text, Msg}, _Bridge,State) ->
     chat:message(Msg),
-    noreply.
+    {noreply,State}.
 
-ws_info(Msg, _Bridge) ->
-    {reply, {text, Msg}}.
+ws_info(Msg, _Bridge,State) ->
+    {reply, {text, Msg},State}.
 
-ws_terminate(_Reason, _Bridge) ->
+ws_terminate(_Reason, _Bridge,_State) ->
     ok.
 
 %% Our pages
